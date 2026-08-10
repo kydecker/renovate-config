@@ -1,0 +1,18 @@
+{
+	"name": "renovate-config",
+	"description": "Shared Renovate configuration files for my personal projects",
+	"version": "1.0.0",
+	"private": true,
+	"license": "GPL-3.0-only",
+	"scripts": {
+		"test": "renovate-config-validator --strict default.json .github/renovate.json"
+	},
+	"author": {
+		"name": "Ky Decker",
+		"url": "https://ky.fyi"
+	},
+	"packageManager": "pnpm@11.21.0",
+	"devDependencies": {
+		"renovate": "^44.17.1"
+	}
+}

@@ -1,0 +1,85 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended",
+		":configMigration",
+		":disableDependencyDashboard",
+		":widenPeerDependencies",
+		"docker:pinDigests",
+		"group:linters",
+		"group:test",
+		"group:vite",
+		"helpers:pinGitHubActionDigestsToSemver",
+		"mergeConfidence:all-badges",
+		"workarounds:all"
+	],
+	"rangeStrategy": "bump",
+	"ignorePaths": ["**/node_modules/**"],
+	"minimumReleaseAge": "4 days",
+	"schedule": ["* * 1-2,15-16 * *"],
+	"postUpdateOptions": ["pnpmDedupe"],
+	"packageRules": [
+		{
+			"groupName": "github-actions",
+			"matchManagers": ["github-actions"]
+		},
+		{
+			"groupName": "astro",
+			"matchDatasources": ["npm"],
+			"matchPackageNames": ["astro", "@astrojs/**", "prettier-plugin-astro"]
+		},
+		{
+			"groupName": "changesets",
+			"matchDatasources": ["npm"],
+			"matchPackageNames": ["@changesets/**"]
+		},
+		{
+			"groupName": "biome",
+			"matchDatasources": ["npm"],
+			"matchPackageNames": ["@biomejs/biome"],
+			"postUpgradeTasks": {
+				"commands": ["biome migrate --write"],
+				"fileFilters": ["biome.json", "biome.jsonc"],
+				"executionMode": "update"
+			}
+		},
+		{
+			"groupName": "wrangler",
+			"matchDatasources": ["npm"],
+			"matchPackageNames": ["wrangler"],
+			"postUpgradeTasks": {
+				"commands": ["wrangler types"],
+				"fileFilters": ["worker-configuration.d.ts"],
+				"executionMode": "update"
+			}
+		},
+		{
+			"groupName": "Unified",
+			"description": "Groups updates for packages from the unified ecosystem (https://unifiedjs.com/)",
+			"matchDatasources": ["npm"],
+			"matchSourceUrls": [
+				"https://github.com/mdx-js/**",
+				"https://github.com/micromark/**",
+				"https://github.com/rehypejs/**",
+				"https://github.com/remarkjs/**",
+				"https://github.com/retextjs/**",
+				"https://github.com/syntax-tree/**",
+				"https://github.com/unifiedjs/**",
+				"https://github.com/vfile/**"
+			]
+		},
+		{
+			"groupName": "Unified",
+			"description": "Adds relevant @types/* packages to the Unified group",
+			"matchDatasources": ["npm"],
+			"matchPackageNames": ["@types/unist", "@types/hast", "@types/mdast", "@types/mdx"]
+		},
+		{
+			"description": "Don’t update Node.js engines field (needed because of the use of rangeStrategy: 'bump' above)",
+			"matchPackageNames": ["node"],
+			"matchManagers": ["npm"],
+			"matchDepTypes": ["engines"],
+			"enabled": false
+		}
+	]
+}
