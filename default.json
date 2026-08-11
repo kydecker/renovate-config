@@ -26,7 +26,7 @@
 		{
 			"groupName": "astro",
 			"matchDatasources": ["npm"],
-			"matchPackageNames": ["astro", "@astrojs/**", "prettier-plugin-astro"]
+			"matchPackageNames": ["astro", "@astrojs/**"]
 		},
 		{
 			"groupName": "changesets",
@@ -36,22 +36,12 @@
 		{
 			"groupName": "biome",
 			"matchDatasources": ["npm"],
-			"matchPackageNames": ["@biomejs/biome"],
-			"postUpgradeTasks": {
-				"commands": ["biome migrate --write"],
-				"fileFilters": ["biome.json", "biome.jsonc"],
-				"executionMode": "update"
-			}
+			"matchPackageNames": ["@biomejs/biome"]
 		},
 		{
 			"groupName": "wrangler",
 			"matchDatasources": ["npm"],
-			"matchPackageNames": ["wrangler"],
-			"postUpgradeTasks": {
-				"commands": ["wrangler types"],
-				"fileFilters": ["worker-configuration.d.ts"],
-				"executionMode": "update"
-			}
+			"matchPackageNames": ["wrangler"]
 		},
 		{
 			"groupName": "Unified",
