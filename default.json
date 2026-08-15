@@ -30,8 +30,9 @@
 		},
 		{
 			"groupName": "changesets",
+			"matchManagers": ["github-actions"],
 			"matchDatasources": ["npm"],
-			"matchPackageNames": ["@changesets/**"]
+			"matchPackageNames": ["changesets/**", "@changesets/**"]
 		},
 		{
 			"groupName": "biome",
