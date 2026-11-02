@@ -2,19 +2,15 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"config:recommended",
-		":configMigration",
-		":disableDependencyDashboard",
 		":widenPeerDependencies",
 		"docker:pinDigests",
 		"group:linters",
 		"group:test",
 		"group:vite",
 		"helpers:pinGitHubActionDigestsToSemver",
-		"mergeConfidence:all-badges",
-		"workarounds:all"
+		"mergeConfidence:all-badges"
 	],
 	"rangeStrategy": "bump",
-	"ignorePaths": ["**/node_modules/**"],
 	"minimumReleaseAge": "4 days",
 	"schedule": ["* * 1-2,15-16 * *"],
 	"postUpdateOptions": ["pnpmDedupe"],
@@ -27,22 +23,6 @@
 			"groupName": "astro",
 			"matchDatasources": ["npm"],
 			"matchPackageNames": ["astro", "@astrojs/**"]
-		},
-		{
-			"groupName": "changesets",
-			"matchManagers": ["github-actions"],
-			"matchDatasources": ["npm"],
-			"matchPackageNames": ["changesets/**", "@changesets/**"]
-		},
-		{
-			"groupName": "biome",
-			"matchDatasources": ["npm"],
-			"matchPackageNames": ["@biomejs/biome"]
-		},
-		{
-			"groupName": "wrangler",
-			"matchDatasources": ["npm"],
-			"matchPackageNames": ["wrangler"]
 		},
 		{
 			"groupName": "Unified",
@@ -71,6 +51,18 @@
 			"matchManagers": ["npm"],
 			"matchDepTypes": ["engines"],
 			"enabled": false
+		},
+		{
+			"description": "Major updates wait for approval in the Dependency Dashboard instead of opening PRs automatically",
+			"matchUpdateTypes": ["major"],
+			"dependencyDashboardApproval": true
+		},
+		{
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch",
+			"description": "Bundles every non-major update into one PR per repo. Must stay last so it overrides the groups above, which then only apply to major updates",
+			"matchPackageNames": ["*"],
+			"matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest", "replacement"]
 		}
 	]
 }
