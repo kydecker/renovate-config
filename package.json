@@ -11,8 +11,8 @@
 		"name": "Ky Decker",
 		"url": "https://ky.fyi"
 	},
-	"packageManager": "pnpm@11.21.0",
+	"packageManager": "pnpm@11.28.12",
 	"devDependencies": {
-		"renovate": "^44.17.1"
+		"renovate": "^44.239.1"
 	}
 }
